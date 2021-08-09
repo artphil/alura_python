@@ -22,3 +22,4 @@ while jogo > 0:
     jogo = escolhe_jogo()
 
 print('Fim do programa.')
+
