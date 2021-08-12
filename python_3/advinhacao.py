@@ -1,9 +1,7 @@
 import random
 
 def jogar():
-    print('###########################################')
-    print('######### Adivinhe o número ###############')
-    print('###########################################')
+    imprime_cabecalho()
 
     numero_secreto = random.randrange(0,101)
     total_de_tentativas = 0
@@ -27,7 +25,7 @@ def jogar():
         chute = int(input('Digite um número entre 1 e 100: '))
         
         if (chute < 1 or chute > 100):
-            print('VocÊ deve digitar um número entre 1 e 100.')
+            print('Você deve digitar um número entre 1 e 100.')
             continue
 
         acertou = chute == numero_secreto 
@@ -49,6 +47,12 @@ def jogar():
                 print(f'O número secreto era {numero_secreto}.')
 
     print('Fim do jogo.')
+
+def imprime_cabecalho(): 
+    print('###########################################')
+    print('######### Adivinhe o número ###############')
+    print('###########################################')
+
 
 if (__name__ == "__main__"):
     jogar()

@@ -1,3 +1,5 @@
 banana
 maçã
 pera
+melancia
+morango
