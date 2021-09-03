@@ -12,12 +12,8 @@ class Programa:
     def nome(self, valor):
         self.__nome = valor.title()
 
-    def imprime(self, text = None):
-        if text:
-            print(text)
-        else:
-            print(f'Nome: {self.nome} ({self.ano})\nLikes: {self.likes}')
-        print('-'*25)
+    def __str__(self):
+        return f'Nome: {self.nome} ({self.ano})\nLikes: {self.likes}'
 
     @property
     def likes(self):
@@ -31,8 +27,8 @@ class Filme(Programa):
         super().__init__(nome, ano)
         self.duracao = duracao
 
-    def imprime(self):
-         super().imprime(f'Nome: {self.nome} ({self.ano})\nDuração: {self.duracao} min\nLikes: {self.likes}')
+    def __str__(self):
+        return f'Nome: {self.nome} ({self.ano})\nDuração: {self.duracao} min\nLikes: {self.likes}'
 
 
 class Serie(Programa):
@@ -40,8 +36,8 @@ class Serie(Programa):
         super().__init__(nome, ano)
         self.temporadas = temporadas
 
-    def imprime(self):
-        super().imprime(f'Nome: {self.nome} ({self.ano})\nTemporadas: {self.temporadas}\nLikes: {self.likes}')
+    def __str__(self):
+        return f'Nome: {self.nome} ({self.ano})\nTemporadas: {self.temporadas}\nLikes: {self.likes}'
 
 
 if __name__ == "__main__":
@@ -49,8 +45,10 @@ if __name__ == "__main__":
     friends =  Serie('friends', 1999, 10)
 
     vingadores.dar_like()
-    vingadores.imprime()
     friends.dar_like()
     friends.dar_like()
     friends.dar_like()
-    friends.imprime()
+
+    playlist = [vingadores, friends]
+    for programa in playlist:
+        print(programa)
