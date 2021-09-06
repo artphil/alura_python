@@ -14,6 +14,9 @@ class Programa:
 
     def __str__(self):
         return f'Nome: {self.nome} ({self.ano})\nLikes: {self.likes}'
+    
+    def __repr__(self):
+        return f'Programa(nome = {self.nome}, ano = {self.ano})'
 
     @property
     def likes(self):
@@ -30,6 +33,8 @@ class Filme(Programa):
     def __str__(self):
         return f'Nome: {self.nome} ({self.ano})\nDuração: {self.duracao} min\nLikes: {self.likes}'
 
+    def __repr__(self):
+        return f'Filme(nome = {self.nome}, ano = {self.ano}, duracao = {self.duracao})'
 
 class Serie(Programa):
     def __init__(self, nome, ano, temporadas):
@@ -39,16 +44,26 @@ class Serie(Programa):
     def __str__(self):
         return f'Nome: {self.nome} ({self.ano})\nTemporadas: {self.temporadas}\nLikes: {self.likes}'
 
+    def __repr__(self):
+        return f'Serie(nome = {self.nome}, ano = {self.ano}, temporadas = {self.temporadas})'
 
+class Playlist(list):
+    def __init__(self, nome, programas):
+        self.__nome =  nome
+        super().__init__(programas)
+
+    
 if __name__ == "__main__":
     vingadores =  Filme('vingadores - ultimato', 2018, 160)
     friends =  Serie('friends', 1999, 10)
-
     vingadores.dar_like()
     friends.dar_like()
     friends.dar_like()
     friends.dar_like()
 
     playlist = [vingadores, friends]
-    for programa in playlist:
+    minha_playlist = Playlist('minha playlist', playlist)
+
+
+    for programa in minha_playlist:
         print(programa)
