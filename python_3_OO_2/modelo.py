@@ -47,23 +47,39 @@ class Serie(Programa):
     def __repr__(self):
         return f'Serie(nome = {self.nome}, ano = {self.ano}, temporadas = {self.temporadas})'
 
-class Playlist(list):
+class Playlist:
     def __init__(self, nome, programas):
         self.__nome =  nome
-        super().__init__(programas)
+        self.__listagem = programas
+        
+    @property
+    def nome(self):
+        return self.__nome
 
+    @nome.setter
+    def nome(self, valor):
+        self.__nome = valor.title()
+
+    def __getitem__(self, item):
+        return self.__listagem[item]
     
+    def __len__(self):
+        return len(self.__listagem)
+
+
 if __name__ == "__main__":
     vingadores =  Filme('vingadores - ultimato', 2018, 160)
+    ddmatar =  Filme('duro de matar', 1988, 110)
     friends =  Serie('friends', 1999, 10)
     vingadores.dar_like()
     friends.dar_like()
     friends.dar_like()
     friends.dar_like()
 
-    playlist = [vingadores, friends]
+    playlist = [vingadores, friends, ddmatar]
     minha_playlist = Playlist('minha playlist', playlist)
 
-
+    print(len(minha_playlist))
+    
     for programa in minha_playlist:
         print(programa)
