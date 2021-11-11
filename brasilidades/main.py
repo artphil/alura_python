@@ -29,4 +29,4 @@ cep = '30270450'
 objeto_cep = BuscaEndereco(cep)
 
 print(objeto_cep)
-print(*objeto_cep.acessa_via_cep())
+print(*objeto_cep.retorna_endereco())
