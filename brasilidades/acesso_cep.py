@@ -21,7 +21,7 @@ class BuscaEndereco:
     def format(self):
         return f'{self.cep[:5]}-{self.cep[5:]}'
 
-    def acessa_via_cep(self): 
+    def retorna_endereco(self): 
         url = f'https://viacep.com.br/ws/{self.cep}/json/'
         r = requests.get(url)
         dados = r.json()
