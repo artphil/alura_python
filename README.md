@@ -10,4 +10,5 @@ Atividades relacionadas ao curso de Python na Alura
 * [Python Collections parte 1: Listas e tuplas](collections)
 * [Python Collections parte 2: Conjuntos e dicionários](collections)
 * [Python Brasil: Validação de dados no padrão nacional](brasilidades)
+* [Testes automatizados: TDD com Python](testes)
 
