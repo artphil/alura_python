@@ -42,6 +42,10 @@ class Leilao:
         self.maior_lance = 0.0
         self.menor_lance = 0.0
 
+    @property
+    def lances(self):
+        return self.__lances[:]
+
     def propoe(self, lance: Lance):
         if self._lance_eh_valido(lance):            
             if not self._tem_lances():
@@ -50,10 +54,8 @@ class Leilao:
             self.__lances.append(lance)
         else:
             raise LanceInvalido('Erro ao propor lance')
-
-    @property
-    def lances(self):
-        return self.__lances[:]
+    def _lance_eh_valido(self, lance):
+        return not self._tem_lances() or self._usuarios_diferentes(lance) and self._valor_maior_que_lance_anterior(lance) 
 
     def _tem_lances(self):
         return bool(self.__lances)
@@ -68,5 +70,3 @@ class Leilao:
             return True
         raise LanceInvalido('O valor do lance deve ser maior que o anterior.')
 
-    def _lance_eh_valido(self, lance):
-        return not self._tem_lances() or self._usuarios_diferentes(lance) and self._valor_maior_que_lance_anterior(lance) 
