@@ -1,16 +1,17 @@
 from unittest import TestCase
 from leilao.dominio import Usuario, Lance, Leilao
+from leilao.excecoes import LanceInvalido
 
 class TestLeilao(TestCase):
 
     def setUp(self):
-        self.usuario1 = Usuario('usuario1')
+        self.usuario1 = Usuario('usuario1', 500.0)
         self.lance_do_usuario1 = Lance(self.usuario1, 100.00)
 
         self.leilao = Leilao('Objeto')  
     
     def test_deve_retornar_o_maior_e_o_menor_valor_de_um_lance_quando_adicionados_em_ordem_crescente(self):
-        usuario2 = Usuario('usuario2')
+        usuario2 = Usuario('usuario2', 500.0)
         lance_do_usuario2 = Lance(usuario2, 150.00)
 
         self.leilao.propoe(self.lance_do_usuario1)
@@ -24,8 +25,8 @@ class TestLeilao(TestCase):
 
     def test_nao_deve_permitir_propor_um_lance_em_ordem_decrescente(self):
 
-        with self.assertRaises(ValueError):
-            usuario2 = Usuario('usuario2')
+        with self.assertRaises(LanceInvalido):
+            usuario2 = Usuario('usuario2', 500.0)
             lance_do_usuario2 = Lance(usuario2, 100.0)
 
             self.leilao.propoe(self.lance_do_usuario1)
@@ -41,8 +42,8 @@ class TestLeilao(TestCase):
         self.assertEqual(valor_esperado,  self.leilao.maior_lance)
 
     def test_deve_retornar_o_maior_e_o_menor_valor_quando_o_leilao_tiver_tres_lances(self):
-        usuario2 = Usuario('usuario2')
-        usuario3 = Usuario('usuario3')
+        usuario2 = Usuario('usuario2', 500.0)
+        usuario3 = Usuario('usuario3', 500.0)
         lance_do_usuario2 = Lance(usuario2, 150.00)
         lance_do_usuario3 = Lance(usuario3, 210.00)
 
@@ -63,7 +64,7 @@ class TestLeilao(TestCase):
         self.assertEqual(1, quantidade_de_lances_recebido)
 
     def test_deve_permitir_propor_um_lance_caso_o_ultimo_usuario_seja_diferente(self):
-        usuario2 = Usuario('usuario2')
+        usuario2 = Usuario('usuario2', 500.0)
         lance_do_usuario2 = Lance(usuario2, 200.0)
 
         self.leilao.propoe(self.lance_do_usuario1)
@@ -76,6 +77,6 @@ class TestLeilao(TestCase):
     def test_nao_deve_permitir_propor_lance_caso_o_usuario_seja_o_mesmo(self):
         lance2_do_usuario1 = Lance(self.usuario1, 200.0)
 
-        with self.assertRaises(ValueError):
+        with self.assertRaises(LanceInvalido):
             self.leilao.propoe(self.lance_do_usuario1)
             self.leilao.propoe(lance2_do_usuario1)
